@@ -1,0 +1,17 @@
+<h2><%= @book.title %></h2>
+<h3>By <%= @book.author.full_name %></h3>
+<p><strong>Genres: </strong><%= @book.genres_to_csv %></p>
+<% if @book.cover.attached? %>
+<p><%= cl_image_tag @book.cover.key, crop: :scale, width: 150, cloud_name: 'jimmy4finga' %></p>
+<% end %>
+<hr>
+<p>
+  <%= link_to "<< Back", :back %> 
+  <%# <% if user_signed_in?  %>
+  <% if policy(Book).edit? || policy(Book).destroy? %>
+  | 
+  <%= link_to 'Edit', edit_book_path if policy(Book).edit? %>
+  |
+  <%= link_to 'Delete', @book, method: :delete, data: { confirm: "Are you sure?" } if policy(Book).destroy? %>
+  <%end%>
+</p>

@@ -1,0 +1,32 @@
+<h1>List Books</h1>
+
+<% if policy(Book).create? %>
+<%# <% if user_signed_in?%> %>
+<p><%= link_to 'New Book', new_book_path %></p>
+<% end %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <%# <% if user_signed_in?%> %>
+    <% if policy(Book).edit? || policy(Book).destroy? %>
+    <th>Actions</th>
+    <%end%>
+  </tr>
+  <% @books.each do |book|%>
+    <tr>
+      <td><%= link_to book.title, book_path(book) %></td>
+      <td><%= link_to book.author.full_name, author_path(book.author) %></td>
+      <td><%= book.genres_to_csv %></td>
+      <%# <% if user_signed_in? %> %>
+      <% if policy(Book).edit? || policy(Book).destroy? %>
+        <td>
+          <%= link_to 'Edit', edit_book_path(book) if policy(Book).edit? %>
+          |
+          <%= link_to 'Delete', book, method: :delete, data: { confirm: "Are you sure?" } if policy(Book).destroy? %>
+        </td>
+      <%end%>
+    </tr>
+  <%end%>
+</table>

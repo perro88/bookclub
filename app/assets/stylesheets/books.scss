@@ -1,0 +1,16 @@
+table {
+  display: flex;
+  tbody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    tr {
+      display: flex;
+      justify-content: space-between;
+        td,th {
+          flex: 1;
+          text-align: left;
+        }
+    }
+  }
+}
